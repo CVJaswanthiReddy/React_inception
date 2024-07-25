@@ -1,5 +1,0 @@
-Difference between a library and a  framework?
-
-A library provides reusable functions, classes, or components that can be directly called by your code. It typically solves a specific problem or provides specific functionalities (like DOM manipulation, data fetching, etc.). Libraries do not impose a specific structure or flow to your application.
-
-A framework, on the other hand, is a more comprehensive toolset that provides a structure and dictates the flow of your application. It usually includes libraries but also includes guidelines, patterns, and rules that you must follow. Frameworks often provide features like routing, state management, and more, aiming to provide a complete solution for building applications.
