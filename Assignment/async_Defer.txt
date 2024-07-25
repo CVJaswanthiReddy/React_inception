@@ -1,0 +1,22 @@
+What is async and defer?
+async Attribute:
+Behavior: When you include async in a <script> tag, the script will begin downloading immediately, but it will execute as soon as it's available, potentially before the HTML document is fully parsed.
+Execution: The script executes asynchronously relative to the rest of the page. This means it won't block the parsing of the HTML and won't wait for other scripts or resources to download and execute.
+Order of Execution: Scripts with async may execute out of order, depending on their download and execution times. Therefore, they are suitable for scripts that can run independently and do not rely on other scripts or the DOM being fully available.
+defer Attribute:
+Behavior: When you use defer in a <script> tag, the script will also begin downloading immediately, but it will only execute after the HTML document has been fully parsed and constructed.
+Execution: The script is deferred until after the HTML document is completely parsed. It will execute before the DOMContentLoaded event fires, meaning it's executed before the DOM is fully ready but after it's been constructed.
+Order of Execution: Scripts with defer execute in the order they appear in the document. They guarantee that scripts are executed in the order they are declared, and they wait for previous scripts to finish downloading and executing before running.
+Practical Usage:
+async: Use async when the script can be executed independently and does not rely on the DOM being fully loaded or on other scripts. Examples include analytics scripts or scripts that load non-critical components.
+
+Example code
+<script async src="example.js"></script>
+defer: Use defer when the script needs access to the DOM structure but can still be safely loaded asynchronously. This is useful for scripts that manipulate or interact with the DOM elements directly.
+
+Example code
+<script defer src="example.js"></script>
+Summary:
+async: Executes as soon as it's available, asynchronously. Doesn't block rendering.
+defer: Executes after the HTML document is fully parsed, before DOMContentLoaded. Scripts execute in order.
+Understanding these attributes is crucial for optimizing script loading and ensuring scripts execute at the right time in relation to the DOM and other resources on your web page.

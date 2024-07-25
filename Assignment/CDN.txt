@@ -1,0 +1,16 @@
+What is CDN? Why do we use it?
+
+CDN Definition: CDN stands for Content Delivery Network. It is a network of distributed servers (often referred to as edge servers or points of presence) located geographically closer to users. The main purpose of a CDN is to deliver content (such as web pages, images, videos, scripts, etc.) to users more efficiently, with high availability and performance.
+
+Functionality: When a user requests content (like a webpage or an image), the CDN optimizes the delivery process:
+
+Edge Server: The CDN checks if the requested content is available on an edge server (which is closer to the user geographically). If the content is cached on the edge server, it can be delivered quickly because it reduces the distance and latency compared to fetching from the origin server.
+Origin Server: If the content is not cached on the edge server (or if the cache has expired), the CDN retrieves the content from the origin server (the main server where the content is stored). The CDN then caches this content on the edge server for future requests, improving performance for subsequent users requesting the same content.
+Benefits of CDN:
+
+Improved Performance: By caching content closer to users, CDNs reduce latency and improve load times, resulting in a better user experience.
+High Availability: CDNs enhance reliability by distributing content across multiple servers. This reduces the risk of server overload or downtime.
+Scalability: CDNs can handle high traffic volumes and sudden spikes in traffic effectively.
+Security: Some CDNs offer security features like DDoS protection and encryption, enhancing the security of content delivery.
+Ease of Use: Integrating CDN services is often straightforward, requiring minimal configuration on the part of website owners or developers.
+In summary, CDNs are indeed very useful in modern web development and content delivery strategies. They optimize content delivery by caching content closer to users, which improves performance and reliability. They also offer scalability and security benefits, making them an essential component for websites and applications that aim to deliver content quickly and efficiently worldwide.
