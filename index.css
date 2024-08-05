@@ -1,30 +1,101 @@
+/* Apply box-sizing to all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 10px;
   border: 1px solid black;
+  padding: 10px;
 }
+
 .nav-items > ul {
   list-style-type: none;
   display: flex;
+  padding: 0;
+  margin: 0;
 }
+
 .nav-items > ul > li {
   padding: 10px;
 }
 
 .logo {
   width: 200px;
+  object-fit: contain;
 }
 
-.card {
-  width: 200px;
-  border: 1px solid black;
-  padding: 10px;
-}
-.card > img {
-  width: 90%;
-}
-.restaurant-list {
+.restaurant-list,
+.shimmer-container {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px;
+  padding: 0;
+}
+
+.card,
+.shimmer-card {
+  width: 250px; /* Ensure the card takes up full available width */
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px; /* Margin to separate cards */
+  box-sizing: border-box;
+}
+
+.card > img,
+.shimmer-img {
+  width: 100%; /* Ensure image fills the width of the card */
+  height: 150px; /* Set a fixed height to match the shimmer placeholder */
+  object-fit: cover; /* Cover the area without distorting the image */
+}
+
+.shimmer-title,
+.shimmer-tags,
+.shimmer-details {
+  background: #e0e0e0;
+  margin: 5px 0;
+  border-radius: 4px;
+}
+
+.shimmer-title {
+  height: 20px;
+  width: 80%;
+}
+
+.shimmer-tags {
+  height: 15px;
+  width: 60%;
+}
+
+.shimmer-details {
+  height: 15px;
+  width: 90%;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -150px 0;
+  }
+  100% {
+    background-position: 150px 0;
+  }
+}
+
+.stroke.animate {
+  background: linear-gradient(to right, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }

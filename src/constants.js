@@ -1,52 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-/**
-      Header
-        -logo(title)
-        -Nav items(right side) 
-        -cart
-      Body
-        - search bar
-        -restaurant card(many cards)
-            -image
-            -name
-            -rating
-            -cusins
-      Footer 
-        -links
-        -copyright
-    */
+export const IMG_CDN_URL =
+  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
 
-//JSX
-const Title = () => (
-  <a href="/">
-    <img
-      className="logo"
-      alt="logo"
-      src="https://foodvilla.delomon.com/assets/images/FoodVilla454/SHAyslider.jpg"
-    ></img>
-  </a>
-);
+// shimmer card unit
+export const shimmer_card_unit = 20;
 
-//component
-
-const Header = () => {
-  return (
-    <div className="header">
-      <Title />
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const restaurantList = [
+// shimmer Menu card unit
+export const shimmer_menu_card_unit = 10;
+export const restaurantList = [
   {
     type: "restaurant",
     data: {
@@ -1863,56 +1823,3 @@ const restaurantList = [
     subtype: "basic",
   },
 ];
-
-const RestaurantCard = ({
-  name,
-  cloudinaryImageId,
-  cuisines,
-  avgRating,
-  lastMileTravelString,
-}) => {
-  return (
-    <div className="card">
-      <img
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
-          cloudinaryImageId
-        }
-      />
-      <h2>{name}</h2>
-      <h4>{cuisines.join(",")}</h4>
-      <span>
-        <h4>
-          <i class="fa-solid fa-star"></i>
-          {avgRating}
-        </h4>
-        <h4>{lastMileTravelString}</h4>
-      </span>
-    </div>
-  );
-};
-
-const Body = () => {
-  return (
-    <div className="restaurant-list">
-      {restaurantList.map((restaurant) => {
-        return <RestaurantCard {...restaurant.data} key={restaurant.data.id} />;
-      })}
-    </div>
-  );
-};
-
-const Footer = () => {
-  return <h4> footer </h4>;
-};
-const AppLayout = () => {
-  return (
-    <>
-      <Header />
-      <Body />
-      <Footer />
-    </>
-  );
-};
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
