@@ -2,6 +2,7 @@ import { restaurantList } from "../constants"; // Make sure the path is correct
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 // Filter the restaurant data according to the input type
 function filterData(searchText, restaurants) {
@@ -81,9 +82,16 @@ const Body = () => {
       </div>
       <div className="restaurant-list">
         {/**we have to write logic for no resaturant found */}
-        {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard {...restaurant?.info} key={restaurant?.info?.id} />
-        ))}
+        {filteredRestaurants.map((restaurant) => {
+          return (
+            <Link
+              to={"/restaurant/" + restaurant?.info?.id}
+              key={restaurant?.info?.id}
+            >
+              <RestaurantCard {...restaurant?.info} />
+            </Link>
+          );
+        })}
       </div>
     </>
   );
