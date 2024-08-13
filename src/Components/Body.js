@@ -1,99 +1,86 @@
-import { restaurantList } from "../constants"; // Make sure the path is correct
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Shimmer from "./Shimmer";
+import { FOOD_FIRE_API_URL } from "../constants";
 import { Link } from "react-router-dom";
+import { filterData } from "../utilis/helper";
+import useResData from "../utilis/useResData";
+import useOnline from "../utilis/useOnline";
 
-// Filter the restaurant data according to the input type
-function filterData(searchText, restaurants) {
-  return restaurants.filter((restaurant) =>
-    restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
-  );
-}
-
-// Body Component for the body section: It contains all restaurant cards
+// Body Component for body section: It contains all restaurant cards
 const Body = () => {
-  // State variables
-  const [allRestaurants, setAllRestaurants] = useState([]);
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  // useState: To create a state variable, searchText, allRestaurants and filteredRestaurants is local state variable
   const [searchText, setSearchText] = useState("");
+  const [allRestaurants, FilterRes] = useResData(FOOD_FIRE_API_URL);
+  const [filteredRestaurants, setFilteredRestaurants] = useState(null);
+  const isOnline = useOnline();
 
-  useEffect(() => {
-    // API call to fetch restaurant data
-    async function getRestaurants() {
-      try {
-        const response = await fetch(
-          "https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING"
-        );
-        const json = await response.json();
-        console.log(json);
+  // if user is not Online then return UserOffline component
+  // if (!isOnline) {
+  //   return <UserOffline />;
+  // }
 
-        // Function to check and extract the restaurant data
-        function checkJsonData(jsonData) {
-          for (let i = 0; i < jsonData?.data?.cards.length; i++) {
-            let checkData =
-              jsonData?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle
-                ?.restaurants;
-            if (checkData !== undefined) {
-              return checkData;
-            }
-          }
-          return [];
-        }
-
-        const resData = checkJsonData(json);
-        setAllRestaurants(resData);
-        setFilteredRestaurants(resData);
-      } catch (error) {
-        console.error("Error fetching restaurant data:", error);
-      }
+  // use searchData function
+  const searchData = (searchText, restaurants) => {
+    if (searchText !== "") {
+      const filteredData = filterData(searchText, restaurants);
+      setFilteredRestaurants(filteredData);
+    } else {
+      setFilteredRestaurants(restaurants);
     }
+  };
 
-    getRestaurants();
-  }, []);
-
-  //not render component(Early return)
+  // if allRestaurants are empty don't render restaurant cards
   if (!allRestaurants) return null;
 
-  // if (filteredRestaurants.length === 0)
-  //   return <h1>No resaturant matched ur filter</h1>;
-  return allRestaurants.length === 0 ? (
-    <Shimmer />
-  ) : (
-    <>
+  return (
+    <div className="body-container">
       <div className="search-container">
         <input
           type="text"
           className="search-input"
           placeholder="Search a restaurant you want..."
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          // update the state variable searchText when typing in input box
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            // automatically call searchData function when user enters data
+            searchData(e.target.value, allRestaurants);
+          }}
         />
         <button
           className="search-btn"
           onClick={() => {
-            // Filter the data and update the state of the restaurants list
-            const data = filterData(searchText, allRestaurants);
-            setFilteredRestaurants(data);
+            // call searchData function when user clicks the search button
+            searchData(searchText, allRestaurants);
           }}
         >
           Search
         </button>
       </div>
-      <div className="restaurant-list">
-        {/**we have to write logic for no resaturant found */}
-        {filteredRestaurants.map((restaurant) => {
-          return (
-            <Link
-              to={"/restaurant/" + restaurant?.info?.id}
-              key={restaurant?.info?.id}
-            >
-              <RestaurantCard {...restaurant?.info} />
-            </Link>
-          );
-        })}
-      </div>
-    </>
+
+      {/* if restaurants data is fetched then display restaurant cards, otherwise display Shimmer UI */}
+      {allRestaurants?.length === 0 && FilterRes?.length === 0 ? (
+        <Shimmer />
+      ) : (
+        <div className="restaurant-list">
+          {/* Mapping restaurants array and passing JSON array data to RestaurantCard component as props with unique key as restaurant.data.id */}
+          {(filteredRestaurants === null ? FilterRes : filteredRestaurants).map(
+            (restaurant) => {
+              return (
+                <Link
+                  to={"/restaurant/" + restaurant?.info?.id}
+                  key={restaurant?.info?.id}
+                >
+                  {/* Redirect to that restaurant menu page on click */}
+                  <RestaurantCard {...restaurant?.info} />
+                </Link>
+              );
+            }
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 
