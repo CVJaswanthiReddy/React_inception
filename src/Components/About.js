@@ -17,7 +17,7 @@ class About extends Component {
   render() {
     console.log("parent- render");
     return (
-      <div>
+      <div className="pt-20 p-5">
         <h1>About Us</h1>
         <p>This is the react live course chapter-07 finding the path</p>
         <Profile name={"first child"} xyz="abc" />

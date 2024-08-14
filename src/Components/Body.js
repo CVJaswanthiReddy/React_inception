@@ -6,21 +6,18 @@ import { Link } from "react-router-dom";
 import { filterData } from "../utilis/helper";
 import useResData from "../utilis/useResData";
 import useOnline from "../utilis/useOnline";
+import UserOffline from "./UserOffline";
 
-// Body Component for body section: It contains all restaurant cards
 const Body = () => {
-  // useState: To create a state variable, searchText, allRestaurants and filteredRestaurants is local state variable
   const [searchText, setSearchText] = useState("");
   const [allRestaurants, FilterRes] = useResData(FOOD_FIRE_API_URL);
   const [filteredRestaurants, setFilteredRestaurants] = useState(null);
   const isOnline = useOnline();
 
-  // if user is not Online then return UserOffline component
-  // if (!isOnline) {
-  //   return <UserOffline />;
-  // }
+  if (!isOnline) {
+    return <UserOffline />;
+  }
 
-  // use searchData function
   const searchData = (searchText, restaurants) => {
     if (searchText !== "") {
       const filteredData = filterData(searchText, restaurants);
@@ -30,53 +27,41 @@ const Body = () => {
     }
   };
 
-  // if allRestaurants are empty don't render restaurant cards
   if (!allRestaurants) return null;
 
   return (
-    <div className="body-container">
-      <div className="search-container">
+    <div className="pt-20 p-5 bg-gray-50">
+      <div className="flex justify-center items-center mb-5">
         <input
           type="text"
-          className="search-input"
+          className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           placeholder="Search a restaurant you want..."
           value={searchText}
-          // update the state variable searchText when typing in input box
           onChange={(e) => {
             setSearchText(e.target.value);
-            // automatically call searchData function when user enters data
             searchData(e.target.value, allRestaurants);
           }}
         />
         <button
-          className="search-btn"
-          onClick={() => {
-            // call searchData function when user clicks the search button
-            searchData(searchText, allRestaurants);
-          }}
+          className="ml-2 p-2 bg-orange-600 text-white rounded-lg shadow hover:bg-orange-500 focus:ring focus:ring-orange-300"
+          onClick={() => searchData(searchText, allRestaurants)}
         >
           Search
         </button>
       </div>
-
-      {/* if restaurants data is fetched then display restaurant cards, otherwise display Shimmer UI */}
       {allRestaurants?.length === 0 && FilterRes?.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="restaurant-list">
-          {/* Mapping restaurants array and passing JSON array data to RestaurantCard component as props with unique key as restaurant.data.id */}
+        <div className="flex flex-wrap justify-center gap-4">
           {(filteredRestaurants === null ? FilterRes : filteredRestaurants).map(
-            (restaurant) => {
-              return (
-                <Link
-                  to={"/restaurant/" + restaurant?.info?.id}
-                  key={restaurant?.info?.id}
-                >
-                  {/* Redirect to that restaurant menu page on click */}
-                  <RestaurantCard {...restaurant?.info} />
-                </Link>
-              );
-            }
+            (restaurant) => (
+              <Link
+                to={"/restaurant/" + restaurant?.info?.id}
+                key={restaurant?.info?.id}
+              >
+                <RestaurantCard {...restaurant?.info} />
+              </Link>
+            )
           )}
         </div>
       )}
