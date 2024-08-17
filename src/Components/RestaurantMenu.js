@@ -8,6 +8,8 @@ import {
 } from "../constants";
 import { MenuShimmer } from "./Shimmer";
 import useRestaurant from "../utilis/useRestaurant";
+import { addItem } from "../utilis/cartSlice";
+import { useDispatch } from "react-redux";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -17,11 +19,14 @@ const RestaurantMenu = () => {
     RESTAURANT_TYPE_KEY,
     MENU_ITEM_TYPE_KEY
   );
-
+  const dispatch = useDispatch();
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+  };
   return !restaurant ? (
     <MenuShimmer />
   ) : (
-    <div className="pt-20 p-5 flex flex-col items-center">
+    <div className="pt-20 p-5 bg-grey-50 flex flex-col items-center">
       {/* Restaurant Summary Section */}
       <div className="w-full max-w-4xl mb-8">
         <div className="flex flex-col md:flex-row items-center md:space-x-8 ">
@@ -89,7 +94,10 @@ const RestaurantMenu = () => {
                     src={ITEM_IMG_CDN_URL + item?.imageId}
                     alt={item?.name}
                   />
-                  <button className="mt-2 bg-orange-600 text-white text-sm py-1 px-2 rounded-md">
+                  <button
+                    className="mt-2 bg-orange-600 text-white text-sm py-1 px-2 rounded-md"
+                    onClick={() => addFoodItem(item)}
+                  >
                     ADD +
                   </button>
                 </div>
