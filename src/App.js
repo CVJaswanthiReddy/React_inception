@@ -9,11 +9,12 @@ import About from "./Components/About";
 import Error from "./Components/Error";
 import Contact from "./Components/Contact";
 import RestaurantMenu from "./Components/RestaurantMenu";
-import Profile from "./Components/Profile";
+
 import Shimmer from "./Components/Shimmer";
 import { Provider } from "react-redux";
 import store from "./utilis/store";
 import Cart from "./Components/Cart";
+import ProfileClass from "./Components/ProfileClass";
 
 const Instamart = lazy(() => import("./Components/Instamart"));
 const AppLayout = () => {
@@ -44,7 +45,7 @@ const appRouter = createBrowserRouter([
         children: [
           {
             path: "profile", //parentpath/{path} => //localhost:1234/about/profile
-            element: <Profile />,
+            element: <ProfileClass />,
           },
         ],
       },

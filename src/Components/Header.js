@@ -46,18 +46,21 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <ul className="flex space-x-4">
           <li>
-            <Link className="text-black-600 hover:text-black-800" to="/">
+            <Link className="ml-2 p-2 rounded-lg hover:bg-orange-500" to="/">
               Home
             </Link>
           </li>
           <li>
-            <Link className="text-black-600 hover:text-black-800" to="/about">
+            <Link
+              className="ml-2 p-2 rounded-lg hover:bg-orange-500"
+              to="/about"
+            >
               About
             </Link>
           </li>
           <li>
             <Link
-              className="text-black-600 hover:text-black-800 hover:bg-orange-400 rounded-lg"
+              className="ml-2 p-2 rounded-lg  hover:bg-orange-500 "
               to="/contact"
             >
               Contact
@@ -75,16 +78,16 @@ const Header = () => {
             </Link>
           </li>
 
-          <li>
+          {/* <li>
             <Link
               className="text-black-600 hover:text-black-800"
               to="/instamart"
             >
               Instamart
             </Link>
-          </li>
+          </li> */}
         </ul>
-        {user.name}
+        {/* {user.name} */}
         {isLoggedin ? (
           <button
             className="flex items-center text-red-600 hover:text-red-800"
