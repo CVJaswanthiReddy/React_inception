@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 const Title = () => (
   <Link to="/">
     <img
+      data-testid="logo"
       className="pl-2 py-2 w-32"
       src={foodVillaLogo}
       alt="logo"
@@ -63,7 +64,11 @@ const Header = () => {
             </Link>
           </li>
           <li className="flex items-center">
-            <Link className="text-black-600 hover:text-black-800" to="/cart">
+            <Link
+              className="text-black-600 hover:text-black-800"
+              data-testid="cart"
+              to="/cart"
+            >
               <i className="fa-solid fa-cart-shopping text-gray-800 text-2xl">
                 {cartItems.length}
               </i>
@@ -90,6 +95,7 @@ const Header = () => {
           >
             Logout
             <span
+              data-testid="online-status"
               className={`ml-2 w-2.5 h-2.5 rounded-full ${
                 isOnline ? "bg-green-500" : "bg-red-500"
               }`}
@@ -102,6 +108,7 @@ const Header = () => {
           >
             Login
             <span
+              data-testid="online-status"
               className={`ml-2 w-2.5 h-2.5 rounded-full ${
                 isOnline ? "bg-green-500" : "bg-red-500"
               }`}

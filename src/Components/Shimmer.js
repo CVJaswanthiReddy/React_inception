@@ -2,7 +2,10 @@ import { shimmer_card_unit, shimmer_menu_card_unit } from "../constants";
 
 const CardShimmer = () => {
   return (
-    <div className="w-56 h-72 p-4 m-2 shadow-lg bg-gray-200 animate-pulse rounded-lg flex flex-col justify-between">
+    <div
+      data-testid="shimmer"
+      className="w-56 h-72 p-4 m-2 shadow-lg bg-gray-200 animate-pulse rounded-lg flex flex-col justify-between"
+    >
       <div className="h-32 bg-gray-300 mb-4 rounded-md"></div>
       <div className="flex-1">
         <div className="h-4 bg-gray-300 mb-2 rounded-md"></div>

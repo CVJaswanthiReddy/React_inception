@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import FoodItem from "./Fooditem";
-import { clearCart } from "../utilis/cartSlice.js";
+import { clearCart } from "../utilis/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -13,7 +13,7 @@ const Cart = () => {
     <div className="pt-20 p-5 bg-gray-50">
       <h1 className="font-bold text-3xl">Cart Items-{cartItems.length}</h1>
       <button
-        className="text-black-600 hover:text-black-800 hover:bg-orange-400 rounded-lg"
+        className="ml-2 p-2 bg-orange-600 text-white rounded-lg shadow hover:bg-orange-500 focus:ring focus:ring-orange-300"
         onClick={() => handleClearCart()}
       >
         Clear Cart

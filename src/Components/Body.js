@@ -33,6 +33,7 @@ const Body = () => {
     <div className="pt-20 p-5 bg-gray-50">
       <div className="flex justify-center items-center mb-5">
         <input
+          data-testid="search-input"
           type="text"
           className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           placeholder="Search a restaurant you want..."
@@ -43,6 +44,7 @@ const Body = () => {
           }}
         />
         <button
+          data-testid="search-btn"
           className="ml-2 p-2 bg-orange-600 text-white rounded-lg shadow hover:bg-orange-500 focus:ring focus:ring-orange-300"
           onClick={() => searchData(searchText, allRestaurants)}
         >
@@ -52,7 +54,10 @@ const Body = () => {
       {allRestaurants?.length === 0 && FilterRes?.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="flex flex-wrap justify-center gap-4">
+        <div
+          className="flex flex-wrap justify-center gap-4"
+          data-testid="res-list"
+        >
           {(filteredRestaurants === null ? FilterRes : filteredRestaurants).map(
             (restaurant) => (
               <Link

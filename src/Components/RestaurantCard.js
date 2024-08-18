@@ -19,7 +19,11 @@ const RestaurantCard = ({
       />
       <div className="flex-grow mt-2">
         <h3 className="text-lg font-semibold truncate">{name}</h3>
-        <h5 className="text-gray-500 truncate">{cuisines.join(", ")}</h5>
+        <h5 className="text-gray-500 truncate">
+          {Array.isArray(cuisines)
+            ? cuisines.join(", ")
+            : "No cuisines available"}
+        </h5>
         <h5 className="text-gray-600 truncate">{areaName}</h5>
       </div>
       <div className="flex items-center justify-between mt-2">
