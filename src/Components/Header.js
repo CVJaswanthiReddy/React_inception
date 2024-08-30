@@ -6,6 +6,7 @@ import useAuth from "../utilis/useAuth";
 import foodVillaLogo from "../Images/foodvilla.png";
 import UserContext from "../utilis/UserContext";
 import { useSelector } from "react-redux";
+import UserOffline from "./UserOffline";
 // Title component for display logo
 const Title = () => (
   <Link to="/">
@@ -32,6 +33,10 @@ const Header = () => {
       setIsLoggedin(false);
     }
   }, [getLocalStorage]);
+  // Display the UserOffline component if the user is offline
+  if (!isOnline) {
+    return <UserOffline />;
+  }
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 shadow-xl bg-white h-16">

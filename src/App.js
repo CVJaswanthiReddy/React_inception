@@ -9,21 +9,24 @@ import About from "./Components/About";
 import Error from "./Components/Error";
 import Contact from "./Components/Contact";
 import RestaurantMenu from "./Components/RestaurantMenu";
-
+import useOnline from "./utilis/useOnline";
 import Shimmer from "./Components/Shimmer";
 import { Provider } from "react-redux";
 import store from "./utilis/store";
 import Cart from "./Components/Cart";
 import ProfileClass from "./Components/ProfileClass";
+import Login from "./Components/Login";
+import UserOffline from "./Components/UserOffline";
 
 const Instamart = lazy(() => import("./Components/Instamart"));
 const AppLayout = () => {
+  const isOnline = useOnline();
   return (
     <>
       <Provider store={store}>
         <Header />
         {/**OUTLET */}
-        <Outlet />
+        {isOnline ? <Outlet /> : null}
         <Footer />
       </Provider>
     </>
@@ -50,13 +53,14 @@ const appRouter = createBrowserRouter([
         ],
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <Contact />,
       },
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
       },
+
       {
         path: "/instamart",
         element: (
@@ -68,6 +72,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/offline",
+        element: <UserOffline />,
       },
     ],
   },

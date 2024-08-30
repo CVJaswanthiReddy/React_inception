@@ -9,7 +9,7 @@ export const Footer = () => {
       {year}
       <a href="https://github.com/CVJaswanthiReddy/React_inception">
         <strong>
-          Food<span>Fire</span>
+          Food<span>Villa</span>
         </strong>
       </a>
     </div>
