@@ -26,7 +26,7 @@ const AppLayout = () => {
       <Provider store={store}>
         <Header />
         {/**OUTLET */}
-        {isOnline ? <Outlet /> : null}
+        {isOnline ? <Outlet /> : <UserOffline />}
         <Footer />
       </Provider>
     </>
@@ -76,10 +76,6 @@ const appRouter = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
-      },
-      {
-        path: "/offline",
-        element: <UserOffline />,
       },
     ],
   },

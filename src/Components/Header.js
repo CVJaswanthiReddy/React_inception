@@ -34,9 +34,9 @@ const Header = () => {
     }
   }, [getLocalStorage]);
   // Display the UserOffline component if the user is offline
-  if (!isOnline) {
-    return <UserOffline />;
-  }
+  // if (!isOnline) {
+  //   return <UserOffline />;
+  // }
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 shadow-xl bg-white h-16">

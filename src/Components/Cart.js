@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import FoodItem from "./FoodItem"; // Ensure the path is correct
+import FoodItem from "./Fooditem"; // Ensure the path is correct
 import { clearCart, removeItem } from "../utilis/cartSlice"; // Ensure the path is correct
 
 const Cart = () => {
