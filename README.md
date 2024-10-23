@@ -49,7 +49,7 @@ Follow these steps to run the project locally:
 
 ## Live Demo
 
-Check out the live application here: FoodVilla
+Check out the live application here: https://food-villa-mu.vercel.app/
 
 ## License
 
