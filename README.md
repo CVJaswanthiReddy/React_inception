@@ -47,6 +47,10 @@ Follow these steps to run the project locally:
    ```
    This will create an optimized production build in the `dist` directory.
 
+## Live Demo
+
+Check out the live application here: FoodVilla
+
 ## License
 
 This project is licensed under the MIT License.
